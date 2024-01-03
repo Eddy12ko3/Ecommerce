@@ -4,6 +4,9 @@ import { HomeComponent } from './ecommerce/pages-ecommerce/home/home.component';
 import { PagesComponent } from './pages.component';
 import { AboutComponent } from './ecommerce/pages-ecommerce/about/about.component';
 import { ShoppingCartComponent } from './ecommerce/pages-ecommerce/shopping-cart/shopping-cart.component';
+import { ShopComponent } from './ecommerce/pages-ecommerce/shop/shop.component';
+import { ChekoutComponent } from './ecommerce/pages-ecommerce/chekout/chekout.component';
+import { notFoundComponent } from './404/404.component';
 
 const routes: Routes = [
   {
@@ -13,7 +16,12 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'about', component: AboutComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
+      { path: 'shop', component: ShopComponent },
+      { path: 'checkout', component: ChekoutComponent }
     ]
+  },
+  {
+    path: '404-not-found', component: notFoundComponent
   }
 ];
 
