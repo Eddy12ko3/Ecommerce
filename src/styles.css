@@ -717,3 +717,15 @@ h1,h2,h3,h4,h5,h6 {
     height: 740px;
   }
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.primary{
+  background-color: #0d6cf8;
+}
+
+.txt-primary{
+  color: #0d6cf8;
+}

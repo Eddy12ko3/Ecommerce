@@ -1,7 +1,19 @@
-.primary{
-    background-color: #0d6cf8;
+.message{
+    position: relative;
 }
 
-.txt-primary{
-    color: #0d6cf8;
+.notify-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    color: #fff;
+    font-size: 13px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f50d0d;
 }
+
