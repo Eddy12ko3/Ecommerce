@@ -4,4 +4,5 @@ export interface SalesProduct{
     price: number; 
     images: Array<string>
     estado: boolean;
+    priceTotal: number
 }

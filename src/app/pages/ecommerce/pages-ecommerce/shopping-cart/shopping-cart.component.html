@@ -28,114 +28,68 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td scope="row" class="py-4">
-                    <div class="cart-info d-flex flex-wrap align-items-center mb-4">
-                      <div class="col-lg-3">
-                        <div class="card-image">
-                          <img src="./assets/images/product-thumb-11.jpg" alt="cloth" class="img-fluid">
+                @for (product of listProducts; track index; let index = $index) {
+                  <tr>
+                    <td scope="row" class="py-4">
+                      <div class="cart-info d-flex flex-wrap align-items-center mb-4">
+                        <div class="col-lg-3">
+                          <div class="card-image">
+                            @defer (on viewport; on timer(5s)) {
+                              <img srcset={{product.images[0]}} alt="cloth" class="img-fluid" loading="lazy">
+                            }
+                            @placeholder {
+                              <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div class="col-lg-9">
+                          <div class="card-detail ps-3">
+                            <h5 class="card-title">
+                              <a href="#" class="text-decoration-none">{{product.title}}</a>
+                            </h5>
+                          </div>
                         </div>
                       </div>
-                      <div class="col-lg-9">
-                        <div class="card-detail ps-3">
-                          <h5 class="card-title">
-                            <a href="#" class="text-decoration-none">Iphone 13</a>
-                          </h5>
-                        </div>
+                    </td>
+                    <td class="py-4">
+                      <div class="input-group product-qty w-50">
+                        <span class="input-group-btn">
+                          <button type="button" class="quantity-left-minus btn btn-light btn-number" data-type="minus" (click)="onClickDecrease(index)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                            </svg>
+                          </button>
+                        </span>
+                        <input type="text" id="quantity" name="quantity" class="form-control input-number text-center"
+                          [value]="product.cant">
+                        <span class="input-group-btn">
+                          <button type="button" class="quantity-right-plus btn btn-light btn-number" data-type="plus" data-field="" (click)="onClickIncrease(index)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                            </svg>
+                          </button>
+                        </span>
                       </div>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="input-group product-qty w-50">
-                      <span class="input-group-btn">
-                        <button type="button" class="quantity-left-minus btn btn-light btn-number" data-type="minus">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-</svg>
-                        </button>
-                      </span>
-                      <input type="text" id="quantity" name="quantity" class="form-control input-number text-center"
-                        value="1">
-                      <span class="input-group-btn">
-                        <button type="button" class="quantity-right-plus btn btn-light btn-number" data-type="plus"
-                          data-field="">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-</svg>
-                        </button>
-                      </span>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="total-price">
-                      <span class="money text-dark">$1500.00</span>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="cart-remove">
-                      <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-</svg>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td scope="row" class="py-4">
-                    <div class="cart-info d-flex flex-wrap align-items-center">
-                      <div class="col-lg-3">
-                        <div class="card-image">
-                          <img src="./assets/images/product-thumb-12.jpg" alt="product" class="img-fluid">
-                        </div>
+                    </td>
+                    <td class="py-4">
+                      <div class="total-price">
+                        <span class="money text-dark">${{product.priceTotal}}</span>
                       </div>
-                      <div class="col-lg-9">
-                        <div class="card-detail ps-3">
-                          <h5 class="card-title">
-                            <a href="#" class="text-decoration-none">Pink watch</a>
-                          </h5>
-                        </div>
+                    </td>
+                    <td class="py-4">
+                      <div class="cart-remove">
+                        <span (click)="onClickRemove(index)">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                          </svg>
+                        </span>
                       </div>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="input-group product-qty w-50">
-                      <span class="input-group-btn">
-                        <button type="button" class="quantity-left-minus btn btn-light btn-number" data-type="minus">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-</svg>
-                        </button>
-                      </span>
-                      <input type="text" id="quantity" name="quantity" class="form-control input-number text-center"
-                        value="1">
-                      <span class="input-group-btn">
-                        <button type="button" class="quantity-right-plus btn btn-light btn-number" data-type="plus"
-                          data-field="">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-</svg>
-                        </button>
-                      </span>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="total-price">
-                      <span class="money text-dark">$870.00</span>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="cart-remove">
-                      <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-</svg>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                  </tr>
+                }
               </tbody>
             </table>
           </div>
@@ -152,7 +106,7 @@
                     <td data-title="Subtotal">
                       <span class="price-amount amount text-dark ps-5">
                         <bdi>
-                          <span class="price-currency-symbol">$</span>2,370.00
+                          <span class="price-currency-symbol">$</span>{{total}}
                         </bdi>
                       </span>
                     </td>
@@ -162,7 +116,7 @@
                     <td data-title="Total">
                       <span class="price-amount amount text-dark ps-5">
                         <bdi>
-                          <span class="price-currency-symbol">$</span>2,370.00</bdi>
+                          <span class="price-currency-symbol">$</span>{{total}}</bdi>
                       </span>
                     </td>
                   </tr>
